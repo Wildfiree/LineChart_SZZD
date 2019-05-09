@@ -1,5 +1,5 @@
 # LineChart_SZZD
-An example of dynamic data curves.
+An example of dynamic data curves, look as [demo](https://wildfiree.github.io/LineChart_SZZD/), created by YuLan Xiong.
 
 搜狐[数字之道](http://mp.sohu.com/profile?xpt=NzJCMERBNUNDN0NEODJBOTkwMTZFMkM2NkU3REM3QjBAcXEuc29odS5jb20=)2018年11月26日[作品](https://www.sohu.com/a/277582331_157078?sec=wd&spm=smpc.author.fd-d.57.15573900125131x9GM13)中视频源码。
 
