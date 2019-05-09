@@ -3701,7 +3701,6 @@ let rows = [
     
     rows = rows.map(d => ({ name: d.name, date: moment(d.date, "YYYY/MM/DD"), value: d.value }))
 let currentRows = rows;
-// let now = rows[34].date, // 初始截止日期
 let now = moment("2017-3-29", "YYYY/MM/DD")
     nowO = rows[0].date, // 数据中最早的日期
     end = rows[rows.length - 1].date; //数据中最早的日期&更新截止日期
@@ -3723,7 +3722,6 @@ let maskD = 30,
 const series = (data) => {
     data = d3.nest()
         .key(d => d.name)
-        // .sortValues((a, b) => a.date-b.date)
         .entries(data);
     data.y = "粉丝数（人）";
     return data;
@@ -3740,13 +3738,11 @@ const x = d3.scaleTime().range([margin.left*2, width-margin.right*2])
 const y = d3.scaleLinear().range([height-margin.bottom, margin.top]);
 const z = d3.scaleOrdinal(d3.schemeCategory10)
 const zc = d3.scaleOrdinal(colorS)
-// const zc = d3.scaleLinear().range([colorS])
 const t = d3.transition().duration(duration).ease(d3.easeLinear)
 const dateMax = data => d3.max(data, d => d3.max(d.values, d => d.date))
 
 const xAxis = g => g
         .attr("transform", `translate(0, ${height-margin.bottom})`)
-        // .transition(t)
         .call(d3.axisBottom(x)
             .ticks(3)   
             .tickFormat(d3.timeFormat("%Y-%m-%d"))
@@ -3755,29 +3751,14 @@ const xAxis = g => g
 const yAxis = g => g
     .attr("class", "axisY")
     .attr("transform", `translate(${margin.left * 2}, 0)`)
-    // .transition(t)
-    .call(d3.axisLeft(y).ticks(2).tickFormat(d3.format(".0s"))) //?? 
+    .call(d3.axisLeft(y).ticks(2).tickFormat(d3.format(".0s"))) 
 
-const pathStroke = (d) =>{
-    let rank = d.values;
-    let strokeFill = rank == 1 ? "url(#temperature-gradient)" : "url(#temperature-gradient)"
-    return strokeFill;
-}
 const svg = d3.select("svg#chart");
 
 const gX = svg.append("g"),
     gY = svg.append("g"),
     gZ = svg.append("g");
-const interPolate = (value) => {
-    let pre2 = d3.select(this)
-    let pre = this.textContent;
-    let then = value;
-    console.log(pre2)
-    console.log(then)
 
-    let inter = d3.interpolateRound(pre, then)
-    return (t) => { this.textContent = inter(t) }
-}
 let currentData = series(rows.filter((d) => { return d.date <= now }));
 let data = currentData;
 
@@ -3786,14 +3767,12 @@ y.domain([0, d3.max(data, d => d3.max(d.values, d => d.value))])
 z.domain(data.map(d => d.name));
 zc.domain(data.map(d => d.name));
 
-
     gX.call(xAxis);
     gY.call(yAxis);
 
     gZ.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("rect")
-        // .attr("width"idth - margin.left - margin.right)
         .attr("width", maskP)
         .attr("height", height - margin.top)
         .attr("transform", `translate( ${margin.left *2 }, 20)`)
@@ -3821,8 +3800,6 @@ zc.domain(data.map(d => d.name));
         .attr("class", "labels label")
         .datum(d => ({ key: d.key, value: d.values[d.values.length - 2].value, date: d.values[d.values.length - 2].date }))
         .attr("style", d => `left: ${x(d.date) - maskD}px; top: ${y(d.value) - maskD/2}px; background-color: ${zc(d.key)}`)
-        // .style("left", d => x(d.date) - maskD)  //style怎么使用
-        // .style("backgroudcolor", "#fff")
 
     LabelsImg = Label.append("img")
         .attr("class", "labels labelsImg")
@@ -3844,8 +3821,6 @@ const update = (data, data2) => {
     y.domain([0, maxY])
 
     let transX = x(data[1].values[0].date) - x(data[1].values[1].date)
-    let numd = data[0].values.length
-    // console.log(data2)
 
     gX.transition().duration(duration).ease(d3.easeLinear).call(xAxis);
     gY.transition().duration(duration).ease(d3.easeLinear).call(yAxis);
