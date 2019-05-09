@@ -1,0 +1,70 @@
+body{
+    background-color: #1e1e20;
+}
+.tick line, .domain{
+    stroke: #1e1e20;
+}
+.tick line{
+    /* stroke: #f3f1f1; */
+}
+
+.time{
+    fill: #ffffff;
+    font-size: 15px;
+}
+.lines {
+    /* stroke: #4fbff2; */
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+div#labels, svg#chart{
+    width: 900px;
+    height: 500px;
+}
+#labels{
+    position: absolute;
+    z-index: 10;
+}
+.label{
+    /* color: #54220f; */
+    /* font-size: 14px; */
+    font-size: 12px;
+    position: absolute;
+    /* background-color: rgba(207, 207, 226, 0.8); */
+    /* width: 130px; */
+    width: 120px;
+    /* height: 50px; */
+    height: 40px;
+    color: #ffffff;
+}
+.labelsText{
+    display: block;
+    /* margin:0px 0px 3px 55px; */
+    margin:0px 0px 2px 40px;
+    padding-top: 3px;
+    font-weight: bold;
+    text-align: center; 
+    letter-spacing: 1px;
+}
+.labelsText2{
+    /* margin-left: 55px; */
+    margin-left: 40px;
+    display: block;
+    text-align: center; 
+    color: #f3f1f1;
+    font-size: 11px;
+}
+.labelsImg{
+    /* width: 50px; */
+    width: 36px;
+    /* height: 50px; */
+    height: 36px;
+    position: absolute;
+    padding: 2px;
+}
+
+.tick text{
+    fill: aliceblue;
+}
